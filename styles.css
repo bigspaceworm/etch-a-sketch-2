@@ -1,0 +1,17 @@
+html{
+	box-sizing: border-box;
+}
+
+*, *::before, *::after{
+	box-sizing: inherit;
+}
+
+#sketchContainer{
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.gridBlock{
+	background-color: white;
+	border: 1px solid black;
+}
