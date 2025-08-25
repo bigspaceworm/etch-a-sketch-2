@@ -15,11 +15,24 @@ function createGrid(){
 		block.style.width = BLOCK_SIZE + "px";
 
 		sketchContainer.appendChild(block);
-
-		// DEBUG
-		console.log("block +1");
 	}
 }
 
-setGridSize();
-createGrid();
+
+function initGrid(){
+	setGridSize();
+	createGrid();
+	
+	const block = sketchContainer.querySelectorAll("div");
+
+	return block;
+}
+
+const blocksHover = initGrid();
+
+blocksHover.forEach((div) => {
+	div.addEventListener("mouseover", () => {
+		div.classList.remove("gridBlock");
+		div.classList.add("gridBlockOnHover");
+	})
+})
