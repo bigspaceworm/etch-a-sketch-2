@@ -1,7 +1,10 @@
 const DEFAULT_GRID_SIZE = 16;
-const BLOCK_SIZE = 1.5; // Temp debug ?
-const GRID_SIDE = 26; const sketchContainer = document.querySelector("#sketchContainer");
+const GRID_SIDE = 35;
+const sketchContainer = document.querySelector("#sketchContainer");
 const buttonGridSize = document.querySelector(".gridSize").querySelector("button");
+const buttonRandomColor = document.querySelector(".randomColor").querySelector("button");
+const buttonSingleColor = document.querySelector(".singleColor").querySelector("button");
+const buttonChangeOpacity = document.querySelector(".changeOpacity").querySelector("button");
 
 function getUserGridSize(){
 	let userGridSize = Number(prompt("Write a number between 2-100 to set the size of the grid", 16));
@@ -36,32 +39,53 @@ function deleteGrid(){
 	}
 }
 
-function changeBlockOnHover(){
+function changeBlockOnHoverSolid(){
 	const blocksHover = sketchContainer.querySelectorAll("div");
 
 	blocksHover.forEach((div) => {
 		div.addEventListener("mouseover", () => {
-			div.classList.remove("gridBlock");
+			div.style.removeProperty("background");
+			div.removeAttribute("class");
 			div.classList.add("gridBlockOnHover");
 		});
 	});
 }
 
+function changeBlockOnHoverRandom(){
+	const blocksHover = sketchContainer.querySelectorAll("div");
+	let randomColor = "white";
+
+	blocksHover.forEach((div) => {
+		div.addEventListener("mouseover", () => {
+			randomColor = "#"+((1<<24)*Math.random()|0).toString(16);
+
+			div.removeAttribute("class");
+			div.style.background = randomColor;
+			div.classList.add("gridBlockOnHoverRandom");
+		});
+	});
+}
 
 buttonGridSize.addEventListener("click", () => {
 	let gridBlockSize = getUserGridSize();
 
 	deleteGrid();
 	createGrid(gridBlockSize);
-	changeBlockOnHover();
-	// DEBUG
-	console.log("Grid size: " + gridBlockSize);
+	changeBlockOnHoverSolid();
+});
+
+buttonRandomColor.addEventListener("click", () => {
+	changeBlockOnHoverRandom();
+});
+
+buttonSingleColor.addEventListener("click", () => {
+	changeBlockOnHoverSolid()
 });
 
 function initGrid(){
 	setGridSize();
 	createGrid(DEFAULT_GRID_SIZE);
-	changeBlockOnHover();
+	changeBlockOnHoverSolid();
 }
 
 // INITIALIZATION
