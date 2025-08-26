@@ -1,9 +1,18 @@
 html{
 	box-sizing: border-box;
+	background-color: #3a3a3a;
 }
 
 *, *::before, *::after{
 	box-sizing: inherit;
+}
+
+#uiContainer{
+	margin: 2px;
+}
+
+.gridSize button{
+	font-size: 20px;
 }
 
 #sketchContainer{
@@ -12,11 +21,11 @@ html{
 }
 
 .gridBlock{
-	background-color: white;
-	border: 1px solid black;
+	background-color: rgb(236, 236, 236);
+	border: 1px solid white;
 }
 
 .gridBlockOnHover{
 	background-color: #3a3a3a;
-	border: 1px solid black;
+	border: 1px solid white;
 }
